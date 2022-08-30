@@ -1,0 +1,29 @@
+/* 
+*   NatCorder
+*   Copyright (c) 2022 NatML Inc. All Rights Reserved.
+*/
+
+#pragma kernel CSMain
+
+Texture2D<float4> Input;
+Texture2D<float4> Watermark;
+float4 Rect;
+RWTexture2D<float4> Result;
+SamplerState LinearClampSampler;
+
+[numthreads(16, 16, 1)]
+void CSMain (uint3 id : SV_DispatchThreadID) {
+    // Check
+    uint width, height;
+    Result.GetDimensions(width, height);
+    if (id.x * id.y >= width * height)
+        return;
+    // Alpha blend
+    float4 inputColor = Input[id.xy];
+    float2 uv = (id.xy - Rect.xy) / Rect.zw;
+    if (uv.x >= 0.0 && uv.x <= 1.0 && uv.y >= 0.0 && uv.y <= 1.0) {
+        float4 watermarkColor = Watermark.SampleLevel(LinearClampSampler, uv, 0);
+        Result[id.xy] = inputColor * (1.0 - watermarkColor.a) + watermarkColor;
+    } else
+        Result[id.xy] = inputColor;
+}

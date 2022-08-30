@@ -1,0 +1,29 @@
+/* 
+*   NatCorder
+*   Copyright (c) 2022 NatML Inc. All Rights Reserved.
+*/
+
+#pragma kernel CSMain
+
+Texture2D<float4> Input;
+float3 Scale;
+float4 Bounds;
+float4 Background;
+RWTexture2D<float4> Result;
+SamplerState LinearClampSampler;
+
+[numthreads(16, 16, 1)]
+void CSMain (uint3 id : SV_DispatchThreadID) {
+    // Check
+    uint width, height;
+    Result.GetDimensions(width, height);
+    if (id.x * id.y >= width * height)
+        return;
+    // Sample
+    float2 size = float2(width, height);
+    float2 uv = (id.xy / size - 0.5) / Scale.z + Scale.xy;
+    if (uv.x < Bounds.x || uv.x > Bounds.y || uv.y < Bounds.z || uv.y > Bounds.w)
+        Result[id.xy] = Background;
+    else
+        Result[id.xy] = Input.SampleLevel(LinearClampSampler, uv, 0);
+}
