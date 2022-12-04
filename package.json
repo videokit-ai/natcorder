@@ -1,0 +1,34 @@
+{
+    "name": "ai.natml.natcorder",
+    "version": "1.9.2",
+    "displayName": "NatCorder",
+    "description": "High performance, cross-platform video recording for Unity Engine.",
+    "unity": "2021.2",
+    "dependencies": {
+        "ai.natml.hub": "1.0.15"
+    },
+    "keywords": [
+        "video",
+        "streaming",
+        "video recording",
+        "camera",
+        "microphone",
+        "computer vision",
+        "opencv",
+        "android",
+        "ios",
+        "macos",
+        "windows",
+        "webgl",
+        "natml",
+        "natdevice",
+        "natcorder"
+    ],
+    "author": {
+        "name": "NatML",
+        "email": "hi@natml.ai",
+        "url": "https://github.com/natmlx"
+    },
+    "license": "Apache-2.0",
+    "repository": "github:natmlx/NatCorder"
+}

@@ -1,0 +1,19 @@
+{
+    "name": "NatML.Recorders.Editor",
+    "references": [
+        "NatML.Hub",
+        "NatML.Hub.Editor",
+        "NatML.Recorders"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
