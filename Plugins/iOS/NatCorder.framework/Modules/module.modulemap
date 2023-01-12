@@ -1,0 +1,6 @@
+framework module NatCorder {
+  umbrella header "NatCorder.h"
+
+  export *
+  module * { export * }
+}
